@@ -24,15 +24,24 @@
 \maketitle
 \tableofcontents
 
-\break
+\break\
 
 \section{Preliminaries}
+
 \subsection{Conditional Probability}
+
 \begin{itemize}
+
     \item \textbf{Definition 1.1.2} \emph{Conditional probability}
-        $$P(A|B) \equiv \frac{P(A \cap B)}{P(B)}$$
+        \[
+            P(A|B) \equiv \frac{P(A \cap B)}{P(B)}
+        \]
+
     \item \textbf{Theorem 1.1.4} \emph{Law of Total Probability}
-        $$P(A) = \sum_{i=1}^n P(A|B_i)P(B_i)$$
+        \[
+            P(A) = \sum_{i=1}^n P(A|B_i)P(B_i)
+        \]
+
     \item \textbf{Theorem 1.1.8}
         \begin{align*}{}
             p(x) &= \sum_y p(x|Y=y)p(y)            & X, Y \text{discrete} \\
@@ -40,251 +49,384 @@
             f(x) &= \sum_y f(x|Y=y)p(y)            & X\text{continuous}, Y \text{discrete} \\
             f(x) &= \int   f(x|Y=y)f(y)\mathrm{d}y & X, Y \text{continuous} \\
         \end{align*}
+
 \end{itemize}
 
 \subsection{Conditional Expectation}
+
 \begin{align*}{}
     E(X|Y = y) &= \sum_{x \in S} xp(x|Y=y) &\text{if $X$ is discrete} \\
     E(X|Y = y) &= \int_{-\infty}^{\infty} xf(x|Y=y)\mathrm{d}x &\text{if $X$ is continuous}
 \end{align*}
 
 \begin{itemize}
-	\item \textbf{Theorem 1.2.3} \emph{Tower Property}\\
-		For $X$ and $Y$ random variables
-		$$E[E(X|Y)] = E(X)$$
-		or in detail:
-		\[
-			E[E(X|Y)] = 
-			\begin{cases}{}
-				\sum_{y \in S} E(X|Y = y) p_Y(y) & \text{if} \ Y \ \text{is discrete} \\
-				\int_{-\infty}^\infty E(X|Y = Y)f_Y(y) \mathrm{d}y & \text{if} \ Y \ \text{is continuous} \\
-			\end{cases}
-		\]
+
+    \item \textbf{Theorem 1.2.3} \emph{Tower Property}\\
+        For $X$ and $Y$ random variables
+        \[
+            E[E(X|Y)] = E(X)
+        \]
+        or in detail:
+        \[
+            E[E(X|Y)] =
+            \begin{cases}{}
+                \sum_{y \in S} E(X|Y = y) p_Y(y) & \text{if} \ Y \ \text{is discrete} \\
+                \int_{-\infty}^\infty E(X|Y = Y)f_Y(y) \mathrm{d}y & \text{if} \ Y \
+                \text{is continuous} \\
+            \end{cases}
+        \]
+
 \end{itemize}
 
 \subsection{Stochastic Processes}
+
 \begin{itemize}
-	\item \textbf{Definition 1.3.1} \emph{Stochastic process} \\
-		A \emph{stochastic process} $(X_t)_{t \in T}$ is an indexed collection of random variables.
-		Set $T$ is called the \emph{index set}.
-		The set $S$ of all possible states is referred to as the \emph{state space} of the process.
+
+    \item \textbf{Definition 1.3.1} \emph{Stochastic process} \\
+        A \emph{stochastic process} ${(X_t)}_{t \in T}$
+        is an indexed collection of random variables.
+        Set $T$ is called the \emph{index set}.
+        The set $S$ of all possible states is referred to as the \emph{state space}
+        of the process.
+
 \end{itemize}
 
 \section{Discrete Time Markov Chains}
+
 \subsection{Basic Definitions}
+
 \begin{itemize}
-	\item \textbf{Definition 2.1.1} \emph{Markov property}\\
-		A stochastic process is said to have the \emph{Markov property} if, given the present state, the future events are independent of the past.
-		For discrete-time discrete-space processes $(X_n)_{n \in N}$ this property can be stated as
-		$$P(X_{n+1} = j | X_n = i, X_{n-1} = i_{n-1}, \ldots, X_0 = i_0) = P(X_{n+1} = j | X_n = i)$$
-		for all $j, i, i_{n-1}, \ldots, i_0 \in S$ and $n \in \mathbb{N}$,
-		and we also define
-		$p_{ij}(n) \equiv P(X_{n+1} = j | X_n = i)$
-		and refer to it as the (one step) transition probability from $i$ to $j$ at time $n$.
+
+    \item \textbf{Definition 2.1.1} \emph{Markov property}\\
+        A stochastic process is said to have the \emph{Markov property} if,
+        given the present state, the future events are independent of the past.
+        For discrete-time discrete-space processes ${(X_n)}_{n \in N}$ this
+        property can be stated as
+        \[
+            P(X_{n+1} = j | X_n = i, X_{n-1} = i_{n-1},
+            \ldots, X_0 = i_0) = P(X_{n+1} = j | X_n = i)
+        \]
+        for all $j, i, i_{n-1}, \ldots, i_0 \in S$ and $n \in \mathbb{N}$,
+        and we also define
+        $p_{ij}(n) \equiv P(X_{n+1} = j | X_n = i)$
+        and refer to it as the (one step) transition probability from $i$ to $j$ at time $n$.
+
 \end{itemize}
 
 \subsection{Modelling examples}
+
 \subsection{More complicated examples }
 
 \subsection{Chapman-Kolmogorov equations}
+
 \begin{itemize}
-	\item \textbf{Notation} \\
-		$p_{ij}^{(n)}$ denotes the probability of reaching state $j$ from state $i$ in $n$ periods
-	\item \textbf{Theorem 2.4.1} \emph{Chapman-Kolmogorov equations}\\
-	$$p_{ij}^{n+m} = \sum_{k\in S} p_{ik}^nP_{kj}^m$$
-	also
-	$$p^{n+m} = p^np^m$$
-\item \textbf{Corollary 2.4.2} \\
-	If $P^n$ is defined to be the $n$th power of a matrix $P$, then $$P^{(n)} = P^n$$
-\item \textbf{Theorem 2.4.7} \\
-	A one-step transition matrix $P$ and the initial distribution $a^{(0)}$ completely characterises the DTMC, that is, all finite-dimensional probabilities can be calculated.
+
+    \item \textbf{Notation} \\
+        $p_{ij}^{(n)}$ denotes the probability of reaching state $j$ from state $i$ in $n$ periods
+
+    \item \textbf{Theorem 2.4.1} \emph{Chapman-Kolmogorov equations} \\
+        \[
+            p_{ij}^{n+m} = \sum_{k\in S} {p_{ik}^n} {P_{kj}^m}
+        \]
+        also
+        \[
+            p^{n+m} = {p^n}{p^m}
+        \]
+
+    \item \textbf{Corollary 2.4.2} \\
+        If $P^n$ is defined to be the $n$th power of a matrix $P$, then
+        \[ P^{(n)} = P^n \]
+
+    \item \textbf{Theorem 2.4.7} \\
+        A one-step transition matrix $P$ and the initial distribution $a^{(0)}$ completely
+        characterises the DTMC, that is, all finite-dimensional probabilities can be calculated.
+
 \end{itemize}
 
 \subsection{Classification of states}
+
 \begin{itemize}
-	\item \textbf{Definition 2.5.1} \emph{Accessibility} \\
-		A state $j$ is said to be accessible from state $i$, denoted $i \rightarrow j$, if $\exists n \geq 0 \backepsilon p_{ij}^{(n)} > 0$
-	\item \textbf{Theorem 2.5.3} \emph{Communication is an equivalence relation}
-		that is
-		\begin{enumerate}
-			\item $i \leftrightarrow i \quad \forall i \in S$ (reflexive)
-			\item $i \leftrightarrow j \implies j \leftrightarrow i$ (symmetric)
-			\item $i \leftrightarrow j, j \leftrightarrow i \implies i \leftrightarrow k$ (transitive)
-		\end{enumerate}
-	\item \textbf{Definition 2.5.4} \emph{Communicating class} \\
-		Let $C \subseteq S$. $C$ is a \emph{communicating class} if
-		\begin{enumerate}
-			\item $i \in C,\ j \in C \implies i \leftrightarrow j$
-			\item $i \in C,\ i \leftrightarrow j \implies j \in C$
-		\end{enumerate}
-		If, in addition to these properties, we cannot leave $C$, that is 
-		$$\forall i \in C,\ \forall k \notin C \backepsilon i \centernot\rightarrow k \implies C \text{ is a closed, communicating class}$$
-	\item \textbf{Definition 2.5.5} \emph{Irreducibility} \\
-		A DTMC is \emph{irreducible} if the state space $S$ is a single (closed) communicating class, and it is called \emph{reducible} if it is composed of several communicating classes
+
+    \item \textbf{Definition 2.5.1} \emph{Accessibility} \\
+        A state $j$ is said to be accessible from state $i$, denoted $i \rightarrow j$, if
+        $\exists n \geq 0 \backepsilon p_{ij}^{(n)} > 0$
+
+    \item \textbf{Theorem 2.5.3} \emph{Communication is an equivalence relation}
+        that is
+        \begin{enumerate}
+            \item $i \leftrightarrow i \quad \forall i \in S$ (reflexive)
+            \item $i \leftrightarrow j \implies j \leftrightarrow i$ (symmetric)
+            \item $i \leftrightarrow j, j \leftrightarrow i \implies i \leftrightarrow k$
+                (transitive)
+        \end{enumerate}
+
+    \item \textbf{Definition 2.5.4} \emph{Communicating class} \\
+        Let $C \subseteq S$. $C$ is a \emph{communicating class} if
+        \begin{enumerate}
+            \item $i \in C,\ j \in C \implies i \leftrightarrow j$
+            \item $i \in C,\ i \leftrightarrow j \implies j \in C$
+        \end{enumerate}
+        If, in addition to these properties, we cannot leave $C$, that is
+        \[
+            forall i \in C,\ \forall k \notin C \backepsilon i \centernot\rightarrow k
+            \implies C \text{ is a closed, communicating class}
+        \]
+
+    \item \textbf{Definition 2.5.5} \emph{Irreducibility} \\
+        A DTMC is \emph{irreducible} if the state space $S$ is a single (closed)
+        communicating class, and it is called \emph{reducible} if it is composed of several
+        communicating classes
+
 \end{itemize}
 
 \subsection{Transience and recurrence}
+
 \begin{itemize}
-	\item \textbf{Notation} \\
-		$$T_j = \text{min}\{n \geq 1 : X_n = j\}$$
-		$$\varrho_{ij} = P(T_j < \infty | X_0 = i)$$
-		Note that for $i \neq j,\ \varrho_{ij} > 0 \iff i \rightarrow j$
-	\item \textbf{Definition 2.6.1} \emph{Recurrence and transience} \\
-		State $i$ is \emph{recurrent} if $\varrho_{ii} = 1$, and \emph{transient} if $\varrho < 1$
-	\item \textbf{Lemma 2.6.2}
-		\begin{align*}
-			P(N_i = \infty | X_0 = i) &= \left
-			\begin{cases}
-				1 & \text{if $i$ is recurrent} \\
-				0 & \text{if $i$ is transient} \\
-			\end{cases} \\
-			E(N_i | X_0 = i) &= \left
-			\begin{cases}{}
-				\infty & \text{if $i$ is recurrent} \\
-				\frac{1}{1 - \varrho_{ii}} & \text{if $i$ is transient} \\
-			\end{cases}
-		\end{align*}
-	\item \textbf{Theorem 2.6.3} \\
-		If $i \rightarrow j$ but $\varrho_{ji} < 1$ then $i$ is transient.
-	\item \textbf{Corollary 2.6.4}
-		\begin{enumerate}
-			\item If $i \rightarrow j$ and $i$ is recurrent then $\varrho_{ji} = 1$
-			\item If $i \rightarrow j$ and $i$ is recurrent then $j$ is also recurrent
-			\item If $i \rightarrow j$ and $j$ is transient then $j$ is also transient
-			\item Recurrence and transience are class properties
-		\end{enumerate}
-	\item \textbf{Theorem 2.6.7} \\
-		State $i$ is recurrent if and only if $\sum_{n=0}^{(n)} = \infty$
-	\item \textbf{Lemma 2.6.9} \\
-		$\sum_{k=0}^{\infty}a_k$ converges if $\lim_{k \to \infty} \frac{a_{k+1}}{a_k} < 1$, and it diverges if $\lim_{k \to \infty} \frac{a_{k+1}}{a_k} > 1$
+
+    \item \textbf{Notation} \\
+        \begin{align*}{}
+            T_j &= \text{min}\{n \geq 1 : X_n = j\} \\
+            \varrho_{ij} &= P(T_j < \infty | X_0 = i)
+        \end{align*}
+        Note that for $i \neq j,\ \varrho_{ij} > 0 \iff i \rightarrow j$
+
+    \item \textbf{Definition 2.6.1} \emph{Recurrence and transience} \\
+        State $i$ is \emph{recurrent} if $\varrho_{ii} = 1$, and \emph{transient} if $\varrho < 1$
+
+    \item \textbf{Lemma 2.6.2}
+        \begin{align*}{}
+            P(N_i = \infty | X_0 = i) &=
+            \begin{cases}{}
+                1 & \text{if $i$ is recurrent} \\
+                0 & \text{if $i$ is transient} \\
+            \end{cases} \\
+            E(N_i | X_0 = i) &=
+            \begin{cases}{}
+                \infty & \text{if $i$ is recurrent} \\
+                \frac{1}{1 - \varrho_{ii}} & \text{if $i$ is transient} \\
+            \end{cases}
+        \end{align*}
+
+    \item \textbf{Theorem 2.6.3} \\
+        If $i \rightarrow j$ but $\varrho_{ji} < 1$ then $i$ is transient.
+
+    \item \textbf{Corollary 2.6.4}
+        \begin{enumerate}
+            \item If $i \rightarrow j$ and $i$ is recurrent then $\varrho_{ji} = 1$
+            \item If $i \rightarrow j$ and $i$ is recurrent then $j$ is also recurrent
+            \item If $i \rightarrow j$ and $j$ is transient then $j$ is also transient
+            \item Recurrence and transience are class properties
+        \end{enumerate}
+
+    \item \textbf{Theorem 2.6.7} \\
+        State $i$ is recurrent if and only if $\sum_{n=0}^{(n)} = \infty$
+
+    \item \textbf{Lemma 2.6.9} \\
+        $\sum_{k=0}^{\infty}a_k$ converges if $\lim_{k \to \infty} \frac{a_{k+1}}{a_k} < 1$,
+        and it diverges if $\lim_{k \to \infty} \frac{a_{k+1}}{a_k} > 1$
+
 \end{itemize}
 
 \subsection{Positive and null recurrence}
-\begin{itemize}
-	\item \textbf{Theorem 2.7.1} A recurrent state $i$ is \emph{positive recurrent} if and only if
-		$$p_{ii}^* = \frac{1}{m_{ii}} > 0$$
-		where 
-		$$m_{ij} = E(T_j | X_0 = i) \quad \text{and} \quad p_{ij}^* = \lim_{N \to \infty} \frac{1}{N+1} \sum_{n=0}^N p_{ij}^{(n)}$$
-		$p_{ij}^*$ is the mean proportion of time spent at $j$ when starting from $i$.
 
-	\item \textbf{Lemma 2.7.2} \\
-		$$\lim_{N \to \infty} \frac{1}{N+1} \sum_{n=0}^N f_n = \lim_{N\to \infty} \frac{1}{N+1} \sum_{n=0}^N f_{n+m} $$
-		for any sequence $(f_n)_{n \in \mathbb{N}}$ which is bounded $|f_n| \leq b$ for all $n$, and for any $m \in \mathbb{N}$
-		% $$\forall (f_n)_{n \in \mathbb{N}} \text{ sequence which is bounded } |f_n| \leq b \quad \forall n, m \in \mathbb{N}$$
-	\item \textbf{Theorem 2.7.3} \\
-		Positive recurrence and null recurrence are class properties, that is if recurrent states $i \leftrightarrow j$ then $i$ and $j$ are both positive or null recurrent.
-	\item \textbf{Theorem 2.7.4} All states in a finite closed communicating class are positive recurrent
-	\item \textbf{Theorem 2.7.5} All states in an open communicating class are transient.
+\begin{itemize}
+
+    \item \textbf{Theorem 2.7.1} A recurrent state $i$ is \emph{positive recurrent} if and only if
+        \[
+            p_{ii}^* = \frac{1}{m_{ii}} > 0
+        \]
+        where
+        \[
+            m_{ij} = E(T_j | X_0 = i) \quad \text{and} \quad p_{ij}^* = \lim_{N \to \infty}
+            \frac{1}{N+1} \sum_{n=0}^N p_{ij}^{(n)}
+        \]
+        $p_{ij}^*$ is the mean proportion of time spent at $j$ when starting from $i$.
+
+    \item \textbf{Lemma 2.7.2} \\
+        \[
+            \lim_{N \to \infty} \frac{1}{N+1} \sum_{n=0}^N f_n = \lim_{N\to \infty}
+            \frac{1}{N+1} \sum_{n=0}^N f_{n+m}
+        \]
+        for any sequence ${(f_n)}_{n \in \mathbb{N}}$ which is bounded $|f_n| \leq b$ for all $n$,
+        and for any $m \in \mathbb{N}$
+
+        % $$\forall (f_n)_{n \in \mathbb{N}} \text{ sequence which is bounded } |f_n| \leq b \quad \forall n, m \in \mathbb{N}$$
+
+    \item \textbf{Theorem 2.7.3}
+        Positive recurrence and null recurrence are class properties, that is if recurrent states
+        $i \leftrightarrow j$ then $i$ and $j$ are both positive or null recurrent.
+
+    \item \textbf{Theorem 2.7.4}
+        All states in a finite closed communicating class are positive recurrent
+
+    \item \textbf{Theorem 2.7.5} All states in an open communicating class are transient.
+
 \end{itemize}
 
 \subsection{Periodicity of chains}
+
 \begin{itemize}
-	\item \textbf{Definition 2.8.1} \emph{Period} \\
-		The \emph{period} $d$ of a state $i$ is the greatest common factor of
-		$\{ n \geq 0 : p_{ii}^{(n)} > 0 \}$.
-		If $d=1$, the state is called aperiodic, and for $d \geq 2$, it is called periodic.
-	\item \textbf{Theorem 2.8.2} Period is a class property, that is $i \leftrightarrow j \implies d_i = d_j$.
+
+    \item \textbf{Definition 2.8.1} \emph{Period} \\
+        The \emph{period} $d$ of a state $i$ is the greatest common factor of
+        $\{ n \geq 0 : p_{ii}^{(n)} > 0 \}$.
+        If $d=1$, the state is called aperiodic, and for $d \geq 2$, it is called periodic.
+
+    \item \textbf{Theorem 2.8.2} Period is a class property, that is
+        $i \leftrightarrow j \implies d_i = d_j$.
+
 \end{itemize}
 
 \subsection{Stationary probabilities: Aperiodic case}
+
 \begin{itemize}
-	\item \textbf{Definition 2.9.1} \emph{Stationary distribution} \\
-		A distribution $\pi = (\pi_1, \pi_2, \ldots) \geq 0$ is \emph{stationary} if it satisfies the \emph{global balance equations}, i.e.
-		$$\pi = \pi P,\ \text{ and } \sum_{j \in S} \pi_j = 1$$
-		(i.e.\ the next state distribution is the same as the current distribution.)\\
-		A chain with a stationary distribution is said to be in a stationary state or steady state.
-	\item \textbf{Proposition 2.9.2} \\
-		If a chain is initially in a stationary distribution, $a^{(0)} = \pi$, then $a^{(n)} = \pi \ \forall n \geq 0$.
-	\item Intuition
-		$$\lim_{n \to \infty} p_{jj}^{(n)} = p_{jj}^* = \frac{1}{m_{jj}} > 0$$
-		Think about our simple weather example and ask for the probability than in a million years it will rain if it rains today.
-		Now what is this probability a million years and one day later?
-		Intuitively, we can argue that these probabilities should be equal after a really long time,
-		and it should be equal to the long run average proportions of the days that are rainy.
-	\item \textbf{Theorem 2.9.3}
-		\begin{enumerate}
-			\item For aperiodic, irreducible chains, the \emph{limiting probabilities} are independent of the initial state, that is $\forall i, j, \in S$,
-				$$\lim_{n \to \infty}p_{jj}^{(n)} = \lim_{n \to \infty} p_{ij}^{(n)} \equiv \pi_j$$
-				and we call this limit $\pi_j$.
-			\item If the chain is also positive recurrent then the limiting probability distribution is the unique stationary distribution.
-		\end{enumerate}
+
+    \item \textbf{Definition 2.9.1} \emph{Stationary distribution} \\
+        A distribution $\pi = (\pi_1, \pi_2, \ldots) \geq 0$ is \emph{stationary} if it satisfies the \emph{global balance equations}, i.e.
+        \[
+            \pi = \pi P,\ \text{ and } \sum_{j \in S} \pi_j = 1
+        \]
+        (i.e.\ the next state distribution is the same as the current distribution.)\\
+        A chain with a stationary distribution is said to be in a stationary state
+        or steady state.
+
+    \item \textbf{Proposition 2.9.2} \\
+        If a chain is initially in a stationary distribution, $a^{(0)} = \pi$,
+        then $a^{(n)} = \pi \ \forall n \geq 0$.
+
+    \item Intuition
+        \[
+            \lim_{n \to \infty} p_{jj}^{(n)} = p_{jj}^* = \frac{1}{m_{jj}} > 0
+        \]
+        Think about our simple weather example and ask for the probability than in a million
+        years it will rain if it rains today.
+        Now what is this probability a million years and one day later?
+        Intuitively, we can argue that these probabilities should be equal
+        after a really long time,
+        and it should be equal to the long run average proportions of the days that are rainy.
+
+    \item \textbf{Theorem 2.9.3}
+        \begin{enumerate}
+            \item For aperiodic, irreducible chains, the \emph{limiting probabilities}
+                are independent of the initial state, that is $\forall i, j, \in S$,
+                \[
+                    \lim_{n \to \infty}p_{jj}^{(n)} =
+                    \lim_{n \to \infty} p_{ij}^{(n)} \equiv \pi_j
+                \]
+                and we call this limit $\pi_j$.
+            \item If the chain is also positive recurrent then the limiting probability
+                distribution is the unique stationary distribution.
+        \end{enumerate}
+
 \end{itemize}
 
 \subsection{Stationary probabilities: Periodic case}
+
 \begin{itemize}
-	\item \textbf{Theorem 2.10.1} (analogous to Theorem 2.9.3)
-		\begin{enumerate}
-			\item For irreducible chains, the steady-state probabilities $\pi_j$ are independent of the initial state, that is,
-				$$\pi_j = p_{jj}^* = p_{ij}^*$$
-				for every $i, j \in S$.
-			\item If the chain is also positive recurrent then the limiting probability distribution $\pi$ is the unique stationary distribution
-		\end{enumerate}
-	\item Summary \\
-		\begin{tabular}{c|c|c}
-			& \emph{Aperiodic} & \emph{Periodic} \\
-			\hline
-			$\lim_{n \to \infty}p_{ij}^{(n)}$ & Exist & Do not exist \\
-			\hline
-			$p_{ij}^*$ & Exist & Exist \\
-			\hline
-			Interpretation for $\pi_j$ & Stationary probability, Limiting probability & Stationary probability \\
-		\end{tabular} \\
-		\begin{align*}{}
-			{\pi_j} & \equiv {p_{jj}^*} = {p_{ij}^*} = {\lim_{n \to \infty} p_{jj}^{(n)}} = {\lim_{n \to \infty} p_{ij}^{(n)}} & \text{(aperiodic)}\\
-			{\pi_j} & \equiv {p_{jj}^*} = {p_{ij}^*} & \text{(periodic)}
-		\end{align*}
+
+    \item \textbf{Theorem 2.10.1} (analogous to Theorem 2.9.3)
+        \begin{enumerate}
+            \item For irreducible chains, the steady-state probabilities $\pi_j$
+                are independent of the initial state, that is,
+                \[
+                    \pi_j = p_{jj}^* = p_{ij}^*
+                \]
+                for every $i, j \in S$.
+            \item If the chain is also positive recurrent then the limiting probability
+                distribution $\pi$ is the unique stationary distribution
+        \end{enumerate}
+
+    \item Summary \\
+        \begin{tabular}{c c c}
+            & \emph{Aperiodic} & \emph{Periodic} \\
+            \midrule
+            $\lim_{n \to \infty}p_{ij}^{(n)}$ & Exist & Do not exist \\
+            \midrule
+            $p_{ij}^*$ & Exist & Exist \\
+            \midrule
+            Interpretation for $\pi_j$ & Stationary probability, Limiting probability &
+            Stationary probability \\
+        \end{tabular} \\
+        \begin{align*}{}
+            {\pi_j} & \equiv {p_{jj}^*} = {p_{ij}^*} = {\lim_{n \to \infty} p_{jj}^{(n)}} =
+            {\lim_{n \to \infty} p_{ij}^{(n)}} & \text{(aperiodic)}\\
+            {\pi_j} & \equiv {p_{jj}^*} = {p_{ij}^*} & \text{(periodic)}
+        \end{align*}
+
 \end{itemize}
 
 \subsection{First passage probabilities and times}
-\begin{itemize}
-	\item Preamble \\
-		$$T_j = \text{min}\{n \geq 1 : X_n = j\}$$
-		Define the \emph{first passage time} of a chain to a set $A \subset S$ as
-		$$\widehat{T}_A = \text{min} \{n \geq 0 : X_n \in A \}$$
-		Note that $\widehat{T}_A = 0$ for $X_0 \in A$,
-		that is if we are already in $A$, it takes no time to get there.
 
-		Otherwise, the \emph{first passage time} $\widehat{T}_A$ is identical to the \emph{first arrival time}
-		$$T_A = \text{min} \{n \geq 1 : X_n \in A\}$$
-		for $X_0 \in S - A$.
-		We defined this variation for convenience.
-	\item \textbf{Theorem 2.11.1} \\
-		Let $A, B \subset S$, with $P(\text{min}\{\widehat{T}_A,\widehat{T}_B\} < \infty | X_0 = i) = 1, \ \forall i$. \\
-		Then then probability
-		$h_i \equiv P(\widehat{T}_A < \widehat{T}_B | X_0 = i)$
-		of reaching set $A$ before set $B$ when starting from state $i$ satisfies
-		\[
-			h_i \equiv P(\widehat{T}_A < \widehat{T}_B | X_0 = i) =
-			\begin{cases}{}
-				0 & \text{if} \ i \in B \\
-				1 & \text{if} \ i \in A \\
-				\sum_{j \in S} P_{ij}h_j & \text{if} \ i \in S - (A \cup B) \\
-			\end{cases}
-		\]
-	\item \textbf{Theorem 2.11.2} \\
-		Let $A \subset S$, with $P(\widehat{T}_A < \infty | X_0 = i) = 1, \ \forall i$.
-		Then the mean time $g_i \equiv E(\widehat{T}_A | X_0 = i)$
-		to reach set $A$ when starting from state $i$ satisfies
-	\[
-		g_i \equiv E(\widehat{T}_A | X_0 = i) =
-		\begin{cases}{}
-			0 & \text{if} \ i \in A \\
-			1 + \sum_{j \in S} P_{ij}g_j & \text{if} \ i \in S - A \\
-		\end{cases}
-	\]
+\begin{itemize}
+
+    \item Preamble \\
+        \[
+            T_j = \text{min}\{n \geq 1 : X_n = j\}
+        \]
+        Define the \emph{first passage time} of a chain to a set $A \subset S$ as
+        \[
+            widehat{T}_A = \text{min} \{n \geq 0 : X_n \in A \}
+        \]
+        Note that $\widehat{T}_A = 0$ for $X_0 \in A$,
+        that is if we are already in $A$, it takes no time to get there.
+
+        Otherwise, the \emph{first passage time} $\widehat{T}_A$ is identical to the
+        \emph{first arrival time}
+        \[
+            T_A = \text{min} \{n \geq 1 : X_n \in A\}
+        \]
+        for $X_0 \in S - A$.
+        We defined this variation for convenience.
+
+    \item \textbf{Theorem 2.11.1} \\
+        Let $A, B \subset S$, with
+        $P(\text{min}\{\widehat{T}_A,\widehat{T}_B\} < \infty | X_0 = i) = 1, \ \forall i$. \\
+        Then then probability
+        $h_i \equiv P(\widehat{T}_A < \widehat{T}_B | X_0 = i)$
+        of reaching set $A$ before set $B$ when starting from state $i$ satisfies
+        \[
+            h_i \equiv P(\widehat{T}_A < \widehat{T}_B | X_0 = i) =
+            \begin{cases}{}
+                0 & \text{if} \ i \in B \\
+                1 & \text{if} \ i \in A \\
+                \sum_{j \in S} P_{ij}h_j & \text{if} \ i \in S - (A \cup B) \\
+            \end{cases}
+        \]
+
+    \item \textbf{Theorem 2.11.2} \\
+        Let $A \subset S$, with $P(\widehat{T}_A < \infty | X_0 = i) = 1, \ \forall i$.
+        Then the mean time $g_i \equiv E(\widehat{T}_A | X_0 = i)$
+        to reach set $A$ when starting from state $i$ satisfies
+        \[
+            g_i \equiv E(\widehat{T}_A | X_0 = i) =
+            \begin{cases}{}
+                0 & \text{if} \ i \in A \\
+                1 + \sum_{j \in S} P_{ij}g_j & \text{if} \ i \in S - A \\
+            \end{cases}
+        \]
+
 \end{itemize}
 
 \subsection{Costs and rewards}
+
 \begin{itemize}
-	\item Preamble \\
-		At step $n$ we incur a cost of $c(X_n)$
+
+    \item Preamble \\
+        At step $n$ we incur a cost of $c(X_n)$
+
 \end{itemize}
+
 \subsubsection{Long-run average cost}
+
 We can write the \emph{long-run average cost} starting from state $i$ to be
-$$\psi_i = \lim_{N \to \infty} \frac{1}{N+1} E\left( \sum_{n=0}^N c(X_n) | X_0 = i \right)$$
+\[
+    psi_i = \lim_{N \to \infty} \frac{1}{N+1} E\left( \sum_{n=0}^N c(X_n) | X_0 = i \right)
+\]
 The long-run average cost is independent of the initial state and is calculated using steady-state probabilities.
 Note that you'll get the same expression for the \emph{long-run mean cost}
-$$\lim_{n \to \infty} E(c(X_n)|X_0=i) = \sum_{j \in S}c(i)\pi_j$$
+\[
+    \lim_{n \to \infty} E(c(X_n)|X_0=i) = \sum_{j \in S}c(i)\pi_j
+\]
 for chains which are also aperiodic.
 
 \subsubsection{Cost in transient states}
@@ -292,71 +434,129 @@ Another situation is when only transient states have non-zero costs.
 In this case the total final cost can be defined $\sum_{n=0}^\infty c(X_n)$.
 
 \subsection{Reversibility}
+
 \begin{itemize}
-	\item \textbf{Definition 2.13.1} \emph{Reversed process} \\
-		If $(X_n)_{n \in N}$ is a stationary DTMC and we fix an $m$, then the process $(\widetilde{X}_n)_{0 \leq n \leq m}$ where $\widetilde{X}_n = X_{m-n}$ is called the reversed process of $X$.
-	\item \textbf{Theorem 2.13.2} \\
-		The reversed process $(\widetilde{X}_n)_{0 \leq n \leq m}$ is a DTMC with transition probabilities
-		$$\widetilde{p}_{ij} = \frac{\pi_jp_{ji}}{\pi_i}$$
-	\item \textbf{Definition 2.13.3} \emph{Reversibility} \\
-		A stationary DTMC is said to be reversible if the reversed process is stochastically the same as the original process,
-		that is $\widetilde{p}_{ij} = p_{ij}$, which implies
-		$$\pi_i \ p_{ij} = \pi_j \ p_{ji}, \ \forall i, j \in S$$
+
+    \item \textbf{Definition 2.13.1} \emph{Reversed process} \\
+        If ${(X_n)}_{n \in N}$ is a stationary DTMC and we fix an $m$, then the process
+        ${(\widetilde{X}_n)}_{0 \leq n \leq m}$ where $\widetilde{X}_n = X_{m-n}$
+        is called the reversed process of $X$.
+
+    \item \textbf{Theorem 2.13.2} \\
+        The reversed process ${(\widetilde{X}_n)}_{0 \leq n \leq m}$
+        is a DTMC with transition probabilities
+        \[
+            \widetilde{p}_{ij} = \frac{ {\pi_j} {p_{ji}} }{\pi_i}
+        \]
+
+    \item \textbf{Definition 2.13.3} \emph{Reversibility} \\
+        A stationary DTMC is said to be reversible if the reversed process is stochastically the
+        same as the original process,
+        that is $\widetilde{p}_{ij} = p_{ij}$, which implies
+        \[
+            \pi_i \ p_{ij} = \pi_j \ p_{ji}, \ \forall i, j \in S
+        \]
         This equation together with $\sum_{i \in S} \pi_i = 1$
         are called the \emph{detailed balance equations}.
+
     \item \textbf{Corollary 2.13.4} \\
-		If $\pi$ satisfies the \emph{detailed balance equations}, then it also satisfies the \emph{global balance equations}.
-	\item A \emph{tree DTMC} has the following properties:
-		\begin{itemize}
-			\item $p_{ij} > 0 \implies p_{ji} > 0$
-			\item No cycles in its state diagram
-		\end{itemize}
-	\item \textbf{Theorem 2.13.7} A stationary \emph{tree DTMC} is reversible.
-	\item \textbf{Corollary 2.13.8} \\
-		A \emph{stationary random walk} that is a positive recurrent random walk in stationarity, is reversible.
+        If $\pi$ satisfies the \emph{detailed balance equations}, then it also satisfies the
+        \emph{global balance equations}.
+
+    \item A \emph{tree DTMC} has the following properties:
+        \begin{itemize}
+            \item $p_{ij} > 0 \implies p_{ji} > 0$
+            \item No cycles in its state diagram
+        \end{itemize}
+
+    \item \textbf{Theorem 2.13.7} A stationary \emph{tree DTMC} is reversible.
+
+    \item \textbf{Corollary 2.13.8} \\
+        A \emph{stationary random walk} that is a positive recurrent random walk in stationarity,
+        is reversible.
+
 \end{itemize}
 
 \section{Poisson Processes}
+
 \subsection{Exponential Random Variable}
+
 \begin{itemize}
-	\item \textbf{Definition 3.1.1:} \emph{Exponential random variable} \\
-        A continuous non-negative random variable $X$ is called exponential with rate $\lambda$ if its cumulative distribution function is
-		$$P(X \leq x) = F(x) = 1 - e ^{-\lambda x}$$
-		Consequently, its density is
-		$$f(x) = \lambda e^{-\lambda x}$$
-		both for $x \geq 0$, and zero otherwise.
-	\item \textbf{Theorem 3.1.2} \\
-		The $r$-th moment of the exponential random variable with rate $\lambda$ is given by
-		$$E(X^r) = \frac{r!}{\lambda ^r}$$
+
+    \item \textbf{Definition 3.1.1:} \emph{Exponential random variable} \\
+        A continuous non-negative random variable $X$ is called exponential with rate $\lambda$
+        if its cumulative distribution function is
+        \[
+            P(X \leq x) = F(x) = 1 - e ^{-\lambda x}
+        \]
+        Consequently, its density is
+        \[
+            f(x) = \lambda e^{-\lambda x}
+        \]
+        both for $x \geq 0$, and zero otherwise.
+
+    \item \textbf{Theorem 3.1.2} \\
+        The $r$-th moment of the exponential random variable with rate $\lambda$ is given by
+        \[
+            E(X^r) = \frac{r!}{\lambda ^r}
+        \]
+
 \end{itemize}
+
 \subsubsection{Memoryless property}
-$$P(X>s+t|X>s) = \frac{P(X>s + t, X>s)}{P(X>s)} = \frac{e^{-\lambda (s+t)}}{e^{-\lambda s}} = e^{-\lambda t} = P(X>t)$$
+
+\[
+    P(X>s+t|X>s) = \frac{P(X>s + t, X>s)}{P(X>s)} = \frac{e^{-\lambda (s+t)}}{e^{-\lambda s}}
+    = e^{-\lambda t} = P(X>t)
+\]
+
 \begin{itemize}
-	\item \textbf{Theorem 3.1.3} \\
-		The only continuous distribution which has a support $[0,\infty)$ with memoryless property is the exponential.
+
+    \item \textbf{Theorem 3.1.3} \\
+        The only continuous distribution which has a support $[0,\infty]$
+        % Change above to a open interval
+        with memoryless property is the exponential.
+
 \end{itemize}
+
 \subsubsection{Properties of minimum of two exponentials}
+
 \subsubsection{Strong memoryless property}
+
 \begin{itemize}
-	\item \textbf{Theorem 3.14} \\
-		If $X_2$ is an exponential random variable with rate $\lambda$ and $X_1$ is an independent non-negative continuous random variable, then $\forall x \geq 0$
-		$$P(X_2 > X_1 _ x | X_2 > X_1) = P(X_2 > x) = e^{-\lambda x}$$
+
+    \item \textbf{Theorem 3.14} \\
+        If $X_2$ is an exponential random variable with rate $\lambda$ and $X_1$
+        is an independent non-negative continuous random variable, then $\forall x \geq 0$
+        \[
+            P(X_2 > X_1 _ x | X_2 > X_1) = P(X_2 > x) = e^{-\lambda x}
+        \]
+
 \end{itemize}
+
 \subsubsection{Sums of I.I.D exponentials}
+
 \begin{itemize}
-	\item \textbf{Theorem 3.1.5} \\
-		If $Z = X_1 + X_2 + \cdots + X_n$, where $X_i \approx \text{exp}(\lambda)$ for all $i$ and independent, then $Z$ is called the gamma $(n, \lambda)$ random variable and its density function is given by
-		$$f_n(z) = \lambda e^{-\lamda x} \frac{(\lambda z)^{n-1}}{(n-1)!}$$
+
+    \item \textbf{Theorem 3.1.5} \\
+        If $Z = X_1 + X_2 + \cdots + X_n$, where $X_i \approx \text{exp}(\lambda)$ for all $i$
+        and independent, then $Z$ is called the gamma $(n, \lambda)$ random variable and its
+        density function is given by
+        \[
+            f_n(z) = \lambda e^{-\lamda x} \frac{{(\lambda z)}^{n-1}}{(n-1)!}
+        \]
 \end{itemize}
 
 \subsection{Poisson Processes}
+
 \begin{itemize}
-	\item \textbf{Definition 3.2.1} \\
-		Let $\tau_i$ be independent exponential $(\lambda)$ random variables,
-		$S_0 = 0, s_n = \tau_1 + \tau_2 + \cdots + \tau_n$ and
-		$N_t = \text{max}\{n \geq 0 : S_n \leq t \}$.
-		Then $(N_t)_{t \in \mathbb{R}_{\geq 0}}$ is a \emph{Poisson process} with rate parameter $\lambda$, or briefly PP($\lambda$).
+
+    \item \textbf{Definition 3.2.1} \\
+        Let $\tau_i$ be independent exponential $(\lambda)$ random variables,
+        $S_0 = 0, s_n = \tau_1 + \tau_2 + \cdots + \tau_n$ and
+        $N_t = \text{max}\{n \geq 0 : S_n \leq t \}$.
+        Then ${(N_t)}_{t \in \mathbb{R}_{\geq 0}}$ is a \emph{Poisson process} with rate parameter
+        $\lambda$, or briefly PP$(\lambda)$.
 \end{itemize}
-<++>
 
 \end{document}
