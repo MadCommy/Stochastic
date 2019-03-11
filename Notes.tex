@@ -185,8 +185,8 @@
 
     \item \textbf{Notation} \\
         \begin{align*}{}
-            T_j &= \text{min}\{n \geq 1 : X_n = j\} \\
-            \varrho_{ij} &= P(T_j < \infty | X_0 = i)
+            T_j          & = \text{min}\{n \geq 1 : X_n = j\} \\
+            \varrho_{ij} & = P(T_j < \infty | X_0 = i)
         \end{align*}
         Note that for $i \neq j,\ \varrho_{ij} > 0 \iff i \rightarrow j$
 
@@ -349,7 +349,7 @@
         \end{tabular} \\
         \begin{align*}{}
             {\pi_j} & \equiv {p_{jj}^*} = {p_{ij}^*} = {\lim_{n \to \infty} p_{jj}^{(n)}} =
-            {\lim_{n \to \infty} p_{ij}^{(n)}} & \text{(aperiodic)}\\
+            {\lim_{n \to \infty} p_{ij}^{(n)}} & \text{(aperiodic)} \\
             {\pi_j} & \equiv {p_{jj}^*} = {p_{ij}^*} & \text{(periodic)}
         \end{align*}
 
@@ -365,7 +365,7 @@
         \]
         Define the \emph{first passage time} of a chain to a set $A \subset S$ as
         \[
-            widehat{T}_A = \text{min} \{n \geq 0 : X_n \in A \}
+            \widehat{T}_A = \text{min} \{n \geq 0 : X_n \in A \}
         \]
         Note that $\widehat{T}_A = 0$ for $X_0 \in A$,
         that is if we are already in $A$, it takes no time to get there.
@@ -498,13 +498,13 @@ In this case the total final cost can be defined $\sum_{n=0}^\infty c(X_n)$.
     \item \textbf{Theorem 3.1.2} \\
         The $r$-th moment of the exponential random variable with rate $\lambda$ is given by
         \[
-            E(X^r) = \frac{r!}{\lambda ^r}
+            E(X^r) = \frac{r!}{\lambda^r}
         \]
 
 \end{itemize}
 
 \subsubsection{Memoryless property}
-
+The \emph{memoryless property} of a stochastic distribution can be stated as:
 \[
     P(X>s+t|X>s) = \frac{P(X>s + t, X>s)}{P(X>s)} = \frac{e^{-\lambda (s+t)}}{e^{-\lambda s}}
     = e^{-\lambda t} = P(X>t)
@@ -513,13 +513,20 @@ In this case the total final cost can be defined $\sum_{n=0}^\infty c(X_n)$.
 \begin{itemize}
 
     \item \textbf{Theorem 3.1.3} \\
-        The only continuous distribution which has a support $[0,\infty]$
+        The only continuous distribution which has a support $[{0,\infty}]$
         % Change above to a open interval
         with memoryless property is the exponential.
 
 \end{itemize}
 
 \subsubsection{Properties of minimum of two exponentials}
+
+\begin{align*}{}
+    P(X_1 < X_2) &= \frac{\lambda_1}{\lambda_1 + \lambda_2} \\
+    Z = \min(X_1, X_2) \implies
+    P(Z>x) &= \mathrm{e}^{-(\lambda_1 + \lambda_2)x} \\
+    P(Z > x, X_1 < X_2) &= P(Z>x) P(X_1 < X_2) \quad \text{i.e.\ they are independent}
+\end{align*}
 
 \subsubsection{Strong memoryless property}
 
@@ -545,6 +552,7 @@ In this case the total final cost can be defined $\sum_{n=0}^\infty c(X_n)$.
         \[
             f_n(z) = \lambda e^{-\lamda x} \frac{{(\lambda z)}^{n-1}}{(n-1)!}
         \]
+
 \end{itemize}
 
 \subsection{Poisson Processes}
@@ -555,8 +563,144 @@ In this case the total final cost can be defined $\sum_{n=0}^\infty c(X_n)$.
         Let $\tau_i$ be independent exponential $(\lambda)$ random variables,
         $S_0 = 0, s_n = \tau_1 + \tau_2 + \cdots + \tau_n$ and
         $N_t = \text{max}\{n \geq 0 : S_n \leq t \}$.
+
         Then ${(N_t)}_{t \in \mathbb{R}_{\geq 0}}$ is a \emph{Poisson process} with rate parameter
         $\lambda$, or briefly PP$(\lambda)$.
+
+    \item \textbf{Theorem 3.2.2} \\
+        If ${(N-t)}_{t \geq 0}$ is a $\mathrm{PP}(\lambda)$,
+        then $N_t$ follows a Poisson distribution with rate $\lambda t$ for any $t$,
+        that is
+        \[
+            P(N_t = k) = \frac{\mathrm{e}^{-\lambda t} {(\lambda t)}^k}{k!}
+        \]
+
+    \item \textbf{Definition}
+        \[
+            {\left(N_t^{(s)}\right)}_{t\geq 0} = N_{s+t} - N_s \quad ; \quad \forall t \geq 0
+        \]
+        I.e.\ \emph{resetting} the counter at $s$.
+
+    \item \textbf{Theorem 3.2.4}
+        The process ${(N_t^{(s)})}_{t \geq 0}$ is a $\mathrm{PP}(\lambda)$,
+        and it is independent of ${(N_u)}_{0 \leq u \leq s}$.
+
+    \item \textbf{Definition 3.2.6}
+        \begin{enumerate}
+            \item A process ${(N_t)}_{t\geq 0}$ is said to have \emph{stationary increments}
+                if $N_{s+t} - N_s$ is identically distributed for all $s$,
+                that is the distribution does not depend on $s$.
+            \item A process ${(N_t)}_{t\geq 0}$ is said to have independent increments if the
+                increments of the distribution is independent for non-overlapping intervals,
+                that is $N_{s_1 + t_1} - N_{s_1}$ and $N_{s_2 + t_2} - N_{s_2}$
+                are independent if $[s_1,s_2 + t_1] \cap [s_2, s_2 + t_2] = \emptyset$.
+        \end{enumerate}
+
+    \item \textbf{Theorem 3.2.7}
+        ${(N_t)}_{t \geq 0}$ is a $\mathrm{PP}(\lambda)$ if and only if
+        \begin{enumerate}
+            \item it has stationary and independent increments
+            \item $N_t$ is a Poisson $(\lamda t)$ random variable for all $t$.
+        \end{enumerate}
+
+    \item \textbf{Definition 3.2.8}
+        A function $f(x)$ is said to be a $o(x)$ function, if
+        $\lim_{x \to 0} \frac{f(x)}{x} = 0$.
+
+    \item \textbf{Theorem 3.2.10}
+        ${(N_t)}_{t \geq 0}$ is a $\mathrm{PP}(\lambda)$ if and only if
+        \begin{enumerate}
+            \item it has stationary and independent increments
+            \item
+                \begin{align*}{}
+                    P(N_h = 0)    & = 1 - \lambda h + o(h) \\
+                    P(N_h = 1)    & = \lambda h + o(h) \\
+                    P(N_h \geq 2) & = o(h)
+                \end{align*}
+        \end{enumerate}
+
 \end{itemize}
+
+\subsection{Super-positioning and Splitting}
+
+\begin{itemize}
+    \item \textbf{Theorem 3.3.1}
+        Let ${(N_t^{(i)})}_{t\geq 0}$ be $\mathrm{PP}(\lambda _I)$ for each $i = 1, \ldots, k$.
+        Then, with $N_t = N_t^{(1)} + \cdots + N_t^{(k)}$, ${(N_t)}_{t\geq 0}$ is a
+        $\mathrm{PP}(\lambda_1 + \cdots + \lambda_k)$.
+
+    \item \textbf{Theorem 3.3.2}
+        Suppose ${(N_t)}_m{t \geq 0}$ is a $\mathrm{PP}(\lambda)$.
+        If an event in this process is of type $i$ with probability $p_i$
+        independent of other events, where $\sum_{i=1}^k p_i = 1$, then the processes
+
+        ${(N_t^{(1)})}_{t\geq 0}, {(N_t^{(2)})}_{t \geq 0}, \ldots, {(N_t^{(k)})}_{t \geq 0}$
+        are independent Poisson processes with rates $\lambda p_1, \lambda p_2, \ldots, \lambda p_k$
+        respectively.
+
+\end{itemize}
+
+\subsection{Campbell's Theorem: Uniform Order Statistics}
+
+\begin{itemize}
+    \item \textbf{Theorem 3.4.1 Campbell's Theorem} \\
+        Let $S_n$ be the event times for a Poisson process.
+
+        If $N_t = n$ is given, then the vector $(S_1, S_2, \ldots, \S_n)$
+        follows the distribution of ordered independent uniform variables
+        $(U_{(1)}, U_{(2)}, \ldots, U_{(n)})$.
+
+        Consequently, the unordered set of arrival times
+        $\{S_1, \ldots, S_n\}$ has the same distribution as $\{U_1, \ldots, U_n\}$.
+
+        In other words, $\{S_1, \ldots, S_n\}$ is uniformly distributed.
+
+\end{itemize}
+
+\subsection{Non-homogeneous Poisson Process}
+
+Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
+
+\begin{itemize}
+    \item \textbf{Definition 3.5.1}
+        A counting process ${(N_t)}_{t\geq 0}$ is a non-homogeneous Poisson process if
+        \begin{enumerate}
+            \item it has independent increments
+            \item
+                \begin{align*}{}
+                    P(N_{t+h} - N_t = 0)    & = 1 - \lambda(t)h + o(h) \\
+                    P(N_{t+h} - N_t = 1)    & = \lambda(t)h + o(h) \\
+                    P(N_{t+h} - N_t \geq 2) & = o(h)
+                \end{align*}
+                Interestingly, the number of arrivals at any fixed time $t$ is still Poisson.
+        \end{enumerate}
+
+    \item \textbf{Theorem 3.5.2}
+        Define
+        \[
+            \Lambda(t) = \int_0^t \lambda(u) \mathrm{d}u
+        \]
+        Then $N_t$ is a Poisson $\Lambda(t)$ random variable for any $t$.
+
+    \item \textbf{Corollary 3.5.3}
+        $N_t - N_s$ is a Poisson random variable with parameter
+        $\Lambda(t) - \Lambda(s) = \int_s^t \lambda(u) \mathrm{d}u$.
+
+    \item \textbf{Corollary 3.5.5}
+        The super-positioning and splitting properties are true for non-homogeneous
+        Poisson processes as well.
+
+\end{itemize}
+
+\subsubsection{Event Times for Non-homogeneous PP}
+\begin{itemize}
+    \item \textbf{Theorem 3.5.6}
+        Let ${(N_t)}_{t \geq 0}$ be a non-homogeneous PP, then if $N_t = k$ is given, then
+        \[
+            (S_1, S_2, \ldots, S_k) \sim (U_{(1)}, U_{(2)}, \ldots, U_{(k)})
+        \]
+\end{itemize}
+
+\subsection{Compound Poisson Processes}
 
 \end{document}
