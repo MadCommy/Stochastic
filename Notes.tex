@@ -5,6 +5,7 @@
 \usepackage{tabularx}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{dsfont}
 \usepackage{geometry}
 \usepackage{booktabs}
 \usepackage{centernot}
@@ -168,7 +169,7 @@
         \end{enumerate}
         If, in addition to these properties, we cannot leave $C$, that is
         \[
-            forall i \in C,\ \forall k \notin C \backepsilon i \centernot\rightarrow k
+            \forall i \in C,\ \forall k \notin C \backepsilon i \centernot\rightarrow k
             \implies C \text{ is a closed, communicating class}
         \]
 
@@ -420,7 +421,7 @@
 
 We can write the \emph{long-run average cost} starting from state $i$ to be
 \[
-    psi_i = \lim_{N \to \infty} \frac{1}{N+1} E\left( \sum_{n=0}^N c(X_n) | X_0 = i \right)
+    \psi_i = \lim_{N \to \infty} \frac{1}{N+1} E\left( \sum_{n=0}^N c(X_n) | X_0 = i \right)
 \]
 The long-run average cost is independent of the initial state and is calculated using steady-state probabilities.
 Note that you'll get the same expression for the \emph{long-run mean cost}
@@ -694,7 +695,7 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
 
 \subsubsection{Event Times for Non-homogeneous PP}
 \begin{itemize}
-    \item \textbf{Theorem 3.5.6}
+    \item \textbf{Theorem 3.5.6} \\
         Let ${(N_t)}_{t \geq 0}$ be a non-homogeneous PP, then if $N_t = k$ is given, then
         \[
             (S_1, S_2, \ldots, S_k) \sim (U_{(1)}, U_{(2)}, \ldots, U_{(k)})
@@ -702,5 +703,229 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
 \end{itemize}
 
 \subsection{Compound Poisson Processes}
+
+\section{Continuous Time Markov Chains}
+\subsection{Basic Definitions}
+
+\begin{itemize}
+    \item \textbf{Notation} \\
+        $\tau_i$ represents the time between states $\widetilde{X}_{i-1}$ and $\widetilde{X}_i$.
+        \[
+            S_n = \sum_{i=1}^n \tau_n
+        \]
+
+    \item \textbf{Definition 4.1.1} \emph{Continuous Time Markov Chain} \\
+        The continuous time stochastic process $(X_t){t \geq 0}$ is called a
+        \emph{continuous time markov chain (CTMC)} if
+
+        \begin{enumerate}
+            \item each duration $\tau_n$ is an exponential random variable with rate $q_i > 0$
+                which depends only on state $\widetilde{X}_{n-1} = i$  if the process leaves
+            \item the corresponding (embedded) discrete time process
+                $(\widetilde{X}_{n \in \mathbb{N}})$ is a DTMC with $\widetilde{p}_{ii} = 0$
+                for all $i$.
+        \end{enumerate}
+
+        More formally
+        \begin{align*}{}
+            P(\widetilde{X}_n = j, \tau_n > y | \widetilde{X}_{n-1} = i, \tau_{n-1},
+            \widetilde{X}_{n-2}, \tau_{n-2}, \ldots, \widetilde{X}_0)
+            &= P(\widetilde{X}_n = j, \tau_n > y | \widetilde{X}_{n-1} = i) \\
+            &= \widetilde{p}_{ij} e^{-q_i y}
+        \end{align*}
+
+    \item \textbf{Definition 4.1.2} \emph{Markov Property} \\
+        A continuous time process ${(X_t)}_{t \geq 0}$ has the \emph{Markov property} if
+        for any $0 \leq s_0 < s_1 < \cdots < s_n < s$, any $t \geq 0$ and any possible states
+        $i_0, \ldots, i_n, i, j$ we have
+        \[
+            P(X_{s+t} = j | X_s = i, X_{s_n} = i_n, \ldots, X_{s_0} - i_0) =
+            P(X_{s+t} = j | X_s = i)
+        \]
+
+    \item \textbf{Theorem 4.1.3} The CTMC ${(X_t)}_{t \geq 0}$ has the Markov Property
+
+    \item \textbf{Definition 4.1.7} \emph{Generator} \\
+        The \emph{rate matrix} or the \emph{generator} $Q$ of the CTMC
+        ${(X_t)}_{t\geq0}$ is defined through its elements
+        \begin{align*}{}
+            q_{ij} &= q_i \widetilde{p}_{ij}, \quad \text{if} \ i \neq j \\
+            q_{ii} &= -q_i = - \sum_{j \in S, j \neq i} q_{ij}
+        \end{align*}
+        Here $q_{ij}$ is called the jump rate from $i$ to $j$.
+
+\end{itemize}
+
+\subsection{Chapman-Kolmogorov Equations}
+
+\begin{itemize}
+    \item \textbf{Notation} \\
+        The transition matrix $P(t)$ has entries
+        \[
+            P_{ij}(t) = P(X_t = j | X_0 = 0)
+        \]
+        The initial distribution is defined to be
+        \[
+            a_i^{(0)} = P(X_0 = i)
+        \]
+
+    \item \textbf{Theorem 4.2.1} \\
+        The matrix $P(t)$ and the initial distribution $a^{(0)}$ completely characterises the CTMC,
+        that is the probability
+        \[
+            P(X_{t_1} = i_1, X_{t_2} = i_2, \ldots, X_{t_k} = i_k)
+        \]
+        can be asserted by only knowing $P(t)$ and $a^{(0)}$.
+
+    \item \textbf{Theorem 4.2.2} \\
+        $P(t)$ has the following properties
+        \begin{enumerate}
+            \item $p_{ij}(t) \geq 0$
+            \item $\sum_{j \in S} p_{ij}(t) = 1$ for all $t \geq 0$
+            \item \emph{Chapman-Kolmogorov Equations} \\
+                $P(t+s) = P(t) P(s)$, that is $p_{ij}(t+s) = \sum_{k \in S} p_{ik}(t) p_{kj}(s)$
+        \end{enumerate}
+
+    \item \textbf{Theorem 4.2.3} \\
+        $P'(0) = Q$, that is
+        \[
+            p'_{ii}(0) = -q_i = q_{ii}, \quad p'_{ij}(0) = q_{ij} \quad \text{for} \ i \neq j
+        \]
+
+\end{itemize}
+
+\subsection{Backward and Forward Equations}
+
+\begin{itemize}
+    \item \textbf{Theorem 4.3.1} \\
+        Let $P(t)$ be the transition matrix and $Q$ be the generator of a CTMC\@.
+        Then $P(t)$ is the unique solution of both the forward Kolmogorov equation
+        \[
+            P'(t) = P(t) Q \quad \text{that is} \quad p'_{ij}(t) = \sum_{k \in S}p_{ik}(t)q_{kj}
+        \]
+        and the backward Kolmogorov equation
+        \[
+            P'(t) = Q P(t) \quad \text{that is} \quad p'_{ij}(t) = \sum_{k \in S}q_{kj}p_{ik}(t)
+        \]
+        Both backward and forward equations have the initial conditions
+        \[
+            P(0) = \mathds{1} \quad \text{that is} \quad p_{ii}(0) = 1, p_{ij}(0) = 0 \
+            \text{for} \ j \neq i
+        \]
+
+    \item \textbf{Theorem 4.3.4} \\
+        For finite state spaces the solution of both backward and
+        forward equations is
+        $P(t) = \mathrm{e}^{Qt}$.
+
+\end{itemize}
+
+\subsection{Transience and Recurrence}
+
+\begin{itemize}
+    \item \textbf{Definition 4.4.2} \\
+        Where
+        \[
+            \varrho_{ij} = P(T_j < \infty | X_0 = i), \quad m_{ij} = E(T_j | X_0 = i)
+        \]
+        We have that state $i$ is
+        \begin{enumerate}
+            \item transient if $\varrho_{ii} < 1$,
+            \item null current if $\varrho = 1$ and $m_{ii} = \infty$,
+            \item positive recurrent if $\varrho = 1$ and $m_{ii} < \infty$.
+        \end{enumerate}
+
+    \item \textbf{Theorem 4.4.3} \\
+        A state $i$ for a CTMC is recurrent if and only if the embedded
+        DTMC is recurrent.
+
+    \item \textbf{Theorem 4.4.4} \\
+        Let ${(X_t)}_{t \geq 0}$ be an irreducible CTMC\@.
+        Suppose $\widetilde{\pi}$ is a positive solution of
+        $\widetilde{\pi} = \widetilde{\pi} \widetilde{P}$ where $\widetilde{P}$ is the transition
+        matrix of the embedded DTMC\@.
+        Then the CTMC is positive recurrent if and only if
+        \[
+            \sum_{i \in S} \frac{\widetilde{\pi}_i}{q_i} < \infty
+        \]
+
+\end{itemize}
+
+\subsection{Stationary probabilities}
+
+\begin{itemize}
+    \item \textbf{Theorem 4.5.1} \\
+        Let ${(X_t)}_{t \geq 0}$ be an irreducible CTMC with limiting distribution $\pi_i$.
+        The limiting distribution is the unique stationary distribution,
+        that is the unique solution of the global balance equations
+        \[
+            \pi Q = 0, \quad \sum_{i \in S} \pi_i = 1
+        \]
+        if and only if the CTMC is positive recurrent.
+
+    \item \textbf{Theorem 4.5.4} \\
+        If the detailed balance equations are satisfied, that is
+        \[
+            \pi_i q_{ij} = \pi_j q_{ji} \quad \forall i \neq j, \quad \text{and} \
+            \sum_i \pi_i = 1
+        \]
+        then also the global balance equations are satisfied, so $\pi$ is the
+        stationary distribution.
+
+\end{itemize}
+
+\subsection{First Passage Properties}
+
+\begin{itemize}
+    \item \textbf{Definition} \emph{First passage time} \\
+        \[
+            \widehat{T}_A = \min \{t \geq 0 : X_t \in A \}
+        \]
+
+    \item \textbf{Theorem 4.6.1} \\
+        Let $A, B \subset S$, such that
+        $P(\min \{\widehat{T}_A, \widehat{T}_B\} < \infty | X_0 = i) = 1, \ \forall i$. \\
+        Then the probability $h_i = P(\widehat{T}_A < \widehat{T}_B | X_0 = i)$
+        of reaching set $A$ before set $B$ when starting from state $i$ satisfies
+
+        \begin{center}{}
+            \begin{tabular}{l l}
+                $h_i = 0$                       & if $i \in B$ \\
+                $h_i = 1$                       & if $i \in A$ \\
+                $\sum_{j \in S} q_{ij} h_j = 0$ & if $i \in S - (A \cup B)$
+            \end{tabular}
+        \end{center}
+
+    \item \textbf{Theorem 4.6.2} \\
+        Let $A \subset S$, such that $P(\widehat{T}_A < \infty | X_0 = i) = 1, \ \forall i$. \\
+        Then the mean time $g_i = E(\widehat{T}_A | X_0 = i)$ to reach $A$ when starting from state
+        $i$ satisfies
+
+        \begin{center}{}
+            \begin{tabular}{l l}
+                $g_i = 0$                        & if $i \in A$ \\
+                $\sum_{j \in S} q_{ij} g_j = -1$ & if $i \in S -S A$
+            \end{tabular}
+        \end{center}
+
+\end{itemize}
+
+\subsection{Costs and Rewards}
+
+\begin{itemize}
+
+    \item \textbf{Definition} \emph{Long run average cost per unit time} \\
+        Where $c(i)$ is the \emph{cost per unit time}, we define
+        \[
+            \psi_i = \lim_{T \to \infty} \frac{1}{T} E
+            \left(\int_0^T c(X_t) \mathrm{d}t | X_0 = i\right)
+        \]
+
+    \item \textbf{Theorem 4.7.1}
+        For an irreducible positive recurrent chain, we have
+        \[
+            \psi_i = \sum_{j \in S} \pi_j c(j).
+        \]
+\end{itemize}
 
 \end{document}
