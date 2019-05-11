@@ -25,7 +25,7 @@
 \maketitle
 \tableofcontents
 
-\break\
+\break{}
 
 \section{Preliminaries}
 
@@ -42,7 +42,6 @@
         \[
             P(A) = \sum_{i=1}^n P(A|B_i)P(B_i)
         \]
-
     \item \textbf{Theorem 1.1.8}
         \begin{align*}{}
             p(x) &= \sum_y p(x|Y=y)p(y)            & X, Y \text{discrete} \\
@@ -50,7 +49,6 @@
             f(x) &= \sum_y f(x|Y=y)p(y)            & X\text{continuous}, Y \text{discrete} \\
             f(x) &= \int   f(x|Y=y)f(y)\mathrm{d}y & X, Y \text{continuous} \\
         \end{align*}
-
 \end{itemize}
 
 \subsection{Conditional Expectation}
@@ -123,8 +121,7 @@
 \begin{itemize}
 
     \item \textbf{Notation} \\
-        $p_{ij}^{(n)}$ denotes the probability of reaching state $j$ from state $i$ in $n$ periods
-
+        $p_{ij}^{(n)}$ denotes the probability of reaching state $j$ from state $i$ in $n$ periods.
     \item \textbf{Theorem 2.4.1} \emph{Chapman-Kolmogorov equations} \\
         \[
             p_{ij}^{n+m} = \sum_{k\in S} {p_{ik}^n} {P_{kj}^m}
@@ -133,11 +130,9 @@
         \[
             p^{n+m} = {p^n}{p^m}
         \]
-
     \item \textbf{Corollary 2.4.2} \\
         If $P^n$ is defined to be the $n$th power of a matrix $P$, then
         \[ P^{(n)} = P^n \]
-
     \item \textbf{Theorem 2.4.7} \\
         A one-step transition matrix $P$ and the initial distribution $a^{(0)}$ completely
         characterises the DTMC, that is, all finite-dimensional probabilities can be calculated.
@@ -151,7 +146,6 @@
     \item \textbf{Definition 2.5.1} \emph{Accessibility} \\
         A state $j$ is said to be accessible from state $i$, denoted $i \rightarrow j$, if
         $\exists n \geq 0 \backepsilon p_{ij}^{(n)} > 0$
-
     \item \textbf{Theorem 2.5.3} \emph{Communication is an equivalence relation}
         that is
         \begin{enumerate}
@@ -160,7 +154,6 @@
             \item $i \leftrightarrow j, j \leftrightarrow i \implies i \leftrightarrow k$
                 (transitive)
         \end{enumerate}
-
     \item \textbf{Definition 2.5.4} \emph{Communicating class} \\
         Let $C \subseteq S$. $C$ is a \emph{communicating class} if
         \begin{enumerate}
@@ -172,7 +165,6 @@
             \forall i \in C,\ \forall k \notin C \backepsilon i \centernot\rightarrow k
             \implies C \text{ is a closed, communicating class}
         \]
-
     \item \textbf{Definition 2.5.5} \emph{Irreducibility} \\
         A DTMC is \emph{irreducible} if the state space $S$ is a single (closed)
         communicating class, and it is called \emph{reducible} if it is composed of several
@@ -190,10 +182,8 @@
             \varrho_{ij} & = P(T_j < \infty | X_0 = i)
         \end{align*}
         Note that for $i \neq j,\ \varrho_{ij} > 0 \iff i \rightarrow j$
-
     \item \textbf{Definition 2.6.1} \emph{Recurrence and transience} \\
         State $i$ is \emph{recurrent} if $\varrho_{ii} = 1$, and \emph{transient} if $\varrho < 1$
-
     \item \textbf{Lemma 2.6.2}
         \begin{align*}{}
             P(N_i = \infty | X_0 = i) &=
@@ -207,10 +197,8 @@
                 \frac{1}{1 - \varrho_{ii}} & \text{if $i$ is transient} \\
             \end{cases}
         \end{align*}
-
     \item \textbf{Theorem 2.6.3} \\
         If $i \rightarrow j$ but $\varrho_{ji} < 1$ then $i$ is transient.
-
     \item \textbf{Corollary 2.6.4}
         \begin{enumerate}
             \item If $i \rightarrow j$ and $i$ is recurrent then $\varrho_{ji} = 1$
@@ -218,10 +206,8 @@
             \item If $i \rightarrow j$ and $j$ is transient then $j$ is also transient
             \item Recurrence and transience are class properties
         \end{enumerate}
-
     \item \textbf{Theorem 2.6.7} \\
         State $i$ is recurrent if and only if $\sum_{n=0}^{(n)} = \infty$
-
     \item \textbf{Lemma 2.6.9} \\
         $\sum_{k=0}^{\infty}a_k$ converges if $\lim_{k \to \infty} \frac{a_{k+1}}{a_k} < 1$,
         and it diverges if $\lim_{k \to \infty} \frac{a_{k+1}}{a_k} > 1$
@@ -380,7 +366,6 @@
         \]
         for $X_0 \in S - A$.
         We defined this variation for convenience.
-
     \item \textbf{Theorem 2.11.1} \\
         Let $A, B \subset S$, with
         $P(\text{min}\{\widehat{T}_A,\widehat{T}_B\} < \infty | X_0 = i) = 1, \ \forall i$. \\
@@ -395,7 +380,6 @@
                 \sum_{j \in S} P_{ij}h_j & \text{if} \ i \in S - (A \cup B) \\
             \end{cases}
         \]
-
     \item \textbf{Theorem 2.11.2} \\
         Let $A \subset S$, with $P(\widehat{T}_A < \infty | X_0 = i) = 1, \ \forall i$.
         Then the mean time $g_i \equiv E(\widehat{T}_A | X_0 = i)$
@@ -407,16 +391,13 @@
                 1 + \sum_{j \in S} P_{ij}g_j & \text{if} \ i \in S - A \\
             \end{cases}
         \]
-
 \end{itemize}
 
 \subsection{Costs and rewards}
 
 \begin{itemize}
-
     \item Preamble \\
         At step $n$ we incur a cost of $c(X_n)$
-
 \end{itemize}
 
 \subsubsection{Long-run average cost}
@@ -439,19 +420,16 @@ In this case the total final cost can be defined $\sum_{n=0}^\infty c(X_n)$.
 \subsection{Reversibility}
 
 \begin{itemize}
-
     \item \textbf{Definition 2.13.1} \emph{Reversed process} \\
         If ${(X_n)}_{n \in N}$ is a stationary DTMC and we fix an $m$, then the process
         ${(\widetilde{X}_n)}_{0 \leq n \leq m}$ where $\widetilde{X}_n = X_{m-n}$
         is called the reversed process of $X$.
-
     \item \textbf{Theorem 2.13.2} \\
         The reversed process ${(\widetilde{X}_n)}_{0 \leq n \leq m}$
         is a DTMC with transition probabilities
         \[
             \widetilde{p}_{ij} = \frac{ {\pi_j} {p_{ji}} }{\pi_i}
         \]
-
     \item \textbf{Definition 2.13.3} \emph{Reversibility} \\
         A stationary DTMC is said to be reversible if the reversed process is stochastically the
         same as the original process,
@@ -461,23 +439,18 @@ In this case the total final cost can be defined $\sum_{n=0}^\infty c(X_n)$.
         \]
         This equation together with $\sum_{i \in S} \pi_i = 1$
         are called the \emph{detailed balance equations}.
-
     \item \textbf{Corollary 2.13.4} \\
         If $\pi$ satisfies the \emph{detailed balance equations}, then it also satisfies the
         \emph{global balance equations}.
-
     \item A \emph{tree DTMC} has the following properties:
         \begin{itemize}
             \item $p_{ij} > 0 \implies p_{ji} > 0$
             \item No cycles in its state diagram
         \end{itemize}
-
     \item \textbf{Theorem 2.13.7} A stationary \emph{tree DTMC} is reversible.
-
     \item \textbf{Corollary 2.13.8} \\
         A \emph{stationary random walk} that is a positive recurrent random walk in stationarity,
         is reversible.
-
 \end{itemize}
 
 \section{Poisson Processes}
@@ -485,7 +458,6 @@ In this case the total final cost can be defined $\sum_{n=0}^\infty c(X_n)$.
 \subsection{Exponential Random Variable}
 
 \begin{itemize}
-
     \item \textbf{Definition 3.1.1:} \emph{Exponential random variable} \\
         A continuous non-negative random variable $X$ is called exponential with rate $\lambda$
         if its cumulative distribution function is
@@ -497,13 +469,11 @@ In this case the total final cost can be defined $\sum_{n=0}^\infty c(X_n)$.
             f(x) = \lambda e^{-\lambda x}
         \]
         both for $x \geq 0$, and zero otherwise.
-
     \item \textbf{Theorem 3.1.2} \\
         The $r$-th moment of the exponential random variable with rate $\lambda$ is given by
         \[
             E(X^r) = \frac{r!}{\lambda^r}
         \]
-
 \end{itemize}
 
 \subsubsection{Memoryless property}
@@ -512,7 +482,6 @@ The \emph{memoryless property} of a stochastic distribution can be stated as:
     P(X>s+t|X>s) = \frac{P(X>s + t, X>s)}{P(X>s)} = \frac{e^{-\lambda (s+t)}}{e^{-\lambda s}}
     = e^{-\lambda t} = P(X>t)
 \]
-
 \begin{itemize}
 
     \item \textbf{Theorem 3.1.3} \\
@@ -523,7 +492,6 @@ The \emph{memoryless property} of a stochastic distribution can be stated as:
 \end{itemize}
 
 \subsubsection{Properties of minimum of two exponentials}
-
 \begin{align*}{}
     P(X_1 < X_2) &= \frac{\lambda_1}{\lambda_1 + \lambda_2} \\
     Z = \min(X_1, X_2) \implies
@@ -532,22 +500,18 @@ The \emph{memoryless property} of a stochastic distribution can be stated as:
 \end{align*}
 
 \subsubsection{Strong memoryless property}
-
 \begin{itemize}
-
     \item \textbf{Theorem 3.14} \\
         If $X_2$ is an exponential random variable with rate $\lambda$ and $X_1$
         is an independent non-negative continuous random variable, then $\forall x \geq 0$
         \[
             P(X_2 > X_1 _ x | X_2 > X_1) = P(X_2 > x) = e^{-\lambda x}
         \]
-
 \end{itemize}
 
 \subsubsection{Sums of I.I.D exponentials}
 
 \begin{itemize}
-
     \item \textbf{Theorem 3.1.5} \\
         If $Z = X_1 + X_2 + \cdots + X_n$, where $X_i \approx \text{exp}(\lambda)$ for all $i$
         and independent, then $Z$ is called the gamma $(n, \lambda)$ random variable and its
@@ -555,13 +519,11 @@ The \emph{memoryless property} of a stochastic distribution can be stated as:
         \[
             f_n(z) = \lambda e^{-\lamda x} \frac{{(\lambda z)}^{n-1}}{(n-1)!}
         \]
-
 \end{itemize}
 
 \subsection{Poisson Processes}
 
 \begin{itemize}
-
     \item \textbf{Definition 3.2.1} \\
         Let $\tau_i$ be independent exponential $(\lambda)$ random variables,
         $S_0 = 0, s_n = \tau_1 + \tau_2 + \cdots + \tau_n$ and
@@ -569,7 +531,6 @@ The \emph{memoryless property} of a stochastic distribution can be stated as:
 
         Then ${(N_t)}_{t \in \mathbb{R}_{\geq 0}}$ is a \emph{Poisson process} with rate parameter
         $\lambda$, or briefly PP$(\lambda)$.
-
     \item \textbf{Theorem 3.2.2} \\
         If ${(N-t)}_{t \geq 0}$ is a $\mathrm{PP}(\lambda)$,
         then $N_t$ follows a Poisson distribution with rate $\lambda t$ for any $t$,
@@ -577,17 +538,14 @@ The \emph{memoryless property} of a stochastic distribution can be stated as:
         \[
             P(N_t = k) = \frac{\mathrm{e}^{-\lambda t} {(\lambda t)}^k}{k!}
         \]
-
     \item \textbf{Definition}
         \[
             {\left(N_t^{(s)}\right)}_{t\geq 0} = N_{s+t} - N_s \quad ; \quad \forall t \geq 0
         \]
         I.e.\ \emph{resetting} the counter at $s$.
-
     \item \textbf{Theorem 3.2.4}
         The process ${(N_t^{(s)})}_{t \geq 0}$ is a $\mathrm{PP}(\lambda)$,
         and it is independent of ${(N_u)}_{0 \leq u \leq s}$.
-
     \item \textbf{Definition 3.2.6}
         \begin{enumerate}
             \item A process ${(N_t)}_{t\geq 0}$ is said to have \emph{stationary increments}
@@ -598,18 +556,15 @@ The \emph{memoryless property} of a stochastic distribution can be stated as:
                 that is $N_{s_1 + t_1} - N_{s_1}$ and $N_{s_2 + t_2} - N_{s_2}$
                 are independent if $[s_1,s_2 + t_1] \cap [s_2, s_2 + t_2] = \emptyset$.
         \end{enumerate}
-
     \item \textbf{Theorem 3.2.7}
         ${(N_t)}_{t \geq 0}$ is a $\mathrm{PP}(\lambda)$ if and only if
         \begin{enumerate}
             \item it has stationary and independent increments
             \item $N_t$ is a Poisson $(\lamda t)$ random variable for all $t$.
         \end{enumerate}
-
     \item \textbf{Definition 3.2.8}
         A function $f(x)$ is said to be a $o(x)$ function, if
         $\lim_{x \to 0} \frac{f(x)}{x} = 0$.
-
     \item \textbf{Theorem 3.2.10}
         ${(N_t)}_{t \geq 0}$ is a $\mathrm{PP}(\lambda)$ if and only if
         \begin{enumerate}
@@ -621,7 +576,6 @@ The \emph{memoryless property} of a stochastic distribution can be stated as:
                     P(N_h \geq 2) & = o(h)
                 \end{align*}
         \end{enumerate}
-
 \end{itemize}
 
 \subsection{Super-positioning and Splitting}
@@ -657,7 +611,6 @@ The \emph{memoryless property} of a stochastic distribution can be stated as:
         $\{S_1, \ldots, S_n\}$ has the same distribution as $\{U_1, \ldots, U_n\}$.
 
         In other words, $\{S_1, \ldots, S_n\}$ is uniformly distributed.
-
 \end{itemize}
 
 \subsection{Non-homogeneous Poisson Process}
@@ -677,18 +630,15 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
                 \end{align*}
                 Interestingly, the number of arrivals at any fixed time $t$ is still Poisson.
         \end{enumerate}
-
     \item \textbf{Theorem 3.5.2}
         Define
         \[
             \Lambda(t) = \int_0^t \lambda(u) \mathrm{d}u
         \]
         Then $N_t$ is a Poisson $\Lambda(t)$ random variable for any $t$.
-
     \item \textbf{Corollary 3.5.3}
         $N_t - N_s$ is a Poisson random variable with parameter
         $\Lambda(t) - \Lambda(s) = \int_s^t \lambda(u) \mathrm{d}u$.
-
     \item \textbf{Corollary 3.5.5}
         The super-positioning and splitting properties are true for non-homogeneous
         Poisson processes as well.
@@ -715,11 +665,9 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
         \[
             S_n = \sum_{i=1}^n \tau_n
         \]
-
     \item \textbf{Definition 4.1.1} \emph{Continuous Time Markov Chain} \\
         The continuous time stochastic process $(X_t){t \geq 0}$ is called a
         \emph{continuous time markov chain (CTMC)} if
-
         \begin{enumerate}
             \item each duration $\tau_n$ is an exponential random variable with rate $q_i > 0$
                 which depends only on state $\widetilde{X}_{n-1} = i$  if the process leaves
@@ -727,7 +675,6 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
                 $(\widetilde{X}_{n \in \mathbb{N}})$ is a DTMC with $\widetilde{p}_{ii} = 0$
                 for all $i$.
         \end{enumerate}
-
         More formally
         \begin{align*}{}
             P(\widetilde{X}_n = j, \tau_n > y | \widetilde{X}_{n-1} = i, \tau_{n-1},
@@ -735,7 +682,6 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
             &= P(\widetilde{X}_n = j, \tau_n > y | \widetilde{X}_{n-1} = i) \\
             &= \widetilde{p}_{ij} e^{-q_i y}
         \end{align*}
-
     \item \textbf{Definition 4.1.2} \emph{Markov Property} \\
         A continuous time process ${(X_t)}_{t \geq 0}$ has the \emph{Markov property} if
         for any $0 \leq s_0 < s_1 < \cdots < s_n < s$, any $t \geq 0$ and any possible states
@@ -744,9 +690,7 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
             P(X_{s+t} = j | X_s = i, X_{s_n} = i_n, \ldots, X_{s_0} - i_0) =
             P(X_{s+t} = j | X_s = i)
         \]
-
     \item \textbf{Theorem 4.1.3} The CTMC ${(X_t)}_{t \geq 0}$ has the Markov Property
-
     \item \textbf{Definition 4.1.7} \emph{Generator} \\
         The \emph{rate matrix} or the \emph{generator} $Q$ of the CTMC
         ${(X_t)}_{t\geq0}$ is defined through its elements
@@ -755,7 +699,6 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
             q_{ii} &= -q_i = - \sum_{j \in S, j \neq i} q_{ij}
         \end{align*}
         Here $q_{ij}$ is called the jump rate from $i$ to $j$.
-
 \end{itemize}
 
 \subsection{Chapman-Kolmogorov Equations}
@@ -770,7 +713,6 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
         \[
             a_i^{(0)} = P(X_0 = i)
         \]
-
     \item \textbf{Theorem 4.2.1} \\
         The matrix $P(t)$ and the initial distribution $a^{(0)}$ completely characterises the CTMC,
         that is the probability
@@ -778,7 +720,6 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
             P(X_{t_1} = i_1, X_{t_2} = i_2, \ldots, X_{t_k} = i_k)
         \]
         can be asserted by only knowing $P(t)$ and $a^{(0)}$.
-
     \item \textbf{Theorem 4.2.2} \\
         $P(t)$ has the following properties
         \begin{enumerate}
@@ -787,13 +728,11 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
             \item \emph{Chapman-Kolmogorov Equations} \\
                 $P(t+s) = P(t) P(s)$, that is $p_{ij}(t+s) = \sum_{k \in S} p_{ik}(t) p_{kj}(s)$
         \end{enumerate}
-
     \item \textbf{Theorem 4.2.3} \\
         $P'(0) = Q$, that is
         \[
             p'_{ii}(0) = -q_i = q_{ii}, \quad p'_{ij}(0) = q_{ij} \quad \text{for} \ i \neq j
         \]
-
 \end{itemize}
 
 \subsection{Backward and Forward Equations}
@@ -814,7 +753,6 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
             P(0) = \mathds{1} \quad \text{that is} \quad p_{ii}(0) = 1, p_{ij}(0) = 0 \
             \text{for} \ j \neq i
         \]
-
     \item \textbf{Theorem 4.3.4} \\
         For finite state spaces the solution of both backward and
         forward equations is
@@ -836,11 +774,9 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
             \item null current if $\varrho = 1$ and $m_{ii} = \infty$,
             \item positive recurrent if $\varrho = 1$ and $m_{ii} < \infty$.
         \end{enumerate}
-
     \item \textbf{Theorem 4.4.3} \\
         A state $i$ for a CTMC is recurrent if and only if the embedded
         DTMC is recurrent.
-
     \item \textbf{Theorem 4.4.4} \\
         Let ${(X_t)}_{t \geq 0}$ be an irreducible CTMC\@.
         Suppose $\widetilde{\pi}$ is a positive solution of
@@ -850,7 +786,6 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
         \[
             \sum_{i \in S} \frac{\widetilde{\pi}_i}{q_i} < \infty
         \]
-
 \end{itemize}
 
 \subsection{Stationary probabilities}
@@ -864,7 +799,6 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
             \pi Q = 0, \quad \sum_{i \in S} \pi_i = 1
         \]
         if and only if the CTMC is positive recurrent.
-
     \item \textbf{Theorem 4.5.4} \\
         If the detailed balance equations are satisfied, that is
         \[
@@ -873,23 +807,19 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
         \]
         then also the global balance equations are satisfied, so $\pi$ is the
         stationary distribution.
-
 \end{itemize}
 
 \subsection{First Passage Properties}
-
 \begin{itemize}
     \item \textbf{Definition} \emph{First passage time} \\
         \[
             \widehat{T}_A = \min \{t \geq 0 : X_t \in A \}
         \]
-
     \item \textbf{Theorem 4.6.1} \\
         Let $A, B \subset S$, such that
         $P(\min \{\widehat{T}_A, \widehat{T}_B\} < \infty | X_0 = i) = 1, \ \forall i$. \\
         Then the probability $h_i = P(\widehat{T}_A < \widehat{T}_B | X_0 = i)$
         of reaching set $A$ before set $B$ when starting from state $i$ satisfies
-
         \begin{center}{}
             \begin{tabular}{l l}
                 $h_i = 0$                       & if $i \in B$ \\
@@ -897,7 +827,6 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
                 $\sum_{j \in S} q_{ij} h_j = 0$ & if $i \in S - (A \cup B)$
             \end{tabular}
         \end{center}
-
     \item \textbf{Theorem 4.6.2} \\
         Let $A \subset S$, such that $P(\widehat{T}_A < \infty | X_0 = i) = 1, \ \forall i$. \\
         Then the mean time $g_i = E(\widehat{T}_A | X_0 = i)$ to reach $A$ when starting from state
@@ -909,20 +838,17 @@ Having now relaxed the stationary assumption, $\lambda(t)$ depends on time.
                 $\sum_{j \in S} q_{ij} g_j = -1$ & if $i \in S -S A$
             \end{tabular}
         \end{center}
-
 \end{itemize}
 
 \subsection{Costs and Rewards}
 
 \begin{itemize}
-
     \item \textbf{Definition} \emph{Long run average cost per unit time} \\
         Where $c(i)$ is the \emph{cost per unit time}, we define
         \[
             \psi_i = \lim_{T \to \infty} \frac{1}{T} E
             \left(\int_0^T c(X_t) \mathrm{d}t | X_0 = i\right)
         \]
-
     \item \textbf{Theorem 4.7.1}
         For an irreducible positive recurrent chain, we have
         \[
